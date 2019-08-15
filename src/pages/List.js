@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { getList, addItem, deleteItem, updateItem, getTicket, dataUserCmb} from './ListFunctions';
+import { getList, addItem, deleteItem, updateItem, getTicket, dataUserCmb} from '../components/ListFunctions';
 
 class List extends Component{
     constructor() {
