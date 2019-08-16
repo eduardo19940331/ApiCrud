@@ -8,6 +8,8 @@ class List extends Component{
             detail: '',
             selectUser: '',
             editDisabled: false,
+            mesaje: '',
+            msj: false,
             items:[],
             dataCmb:[]
 
@@ -53,8 +55,14 @@ class List extends Component{
     onSubmit = e => {
         e.preventDefault();
         if(this.state.detail === "" || this.state.selectUser === '') {
-            alert('Se detectaron campos vacios por favor llenarlos');
+            this.setState({
+                msj: true,
+                mesaje: "Se detectaron campos vacios por favor llenarlos"
+            });
         }else{
+            this.setState({
+                msj:false
+            })
             addItem(this.state.detail, this.state.selectUser).then(() => {
                 this.getAll();
             });
@@ -64,12 +72,19 @@ class List extends Component{
             });
         }
     }
-
+    
     onUpdate = (e) => {
         e.preventDefault();
+        console.log(this.state.selectUser);
         if(this.state.detail === "" || this.state.selectUser === '') {
-            alert('Se detectaron campos vacios por favor llenarlos');
+            this.setState({
+                msj: true,
+                mesaje: "Se detectaron campos vacios por favor llenarlos"
+            });
         }else{
+            this.setState({
+                msj:false
+            })
             updateItem(this.state.detail, this.state.selectUser, this.state.ItemId).then(() => {
                 this.getAll();
             });
@@ -102,7 +117,8 @@ class List extends Component{
             id: '',
             detail: '',
             selectUser: '',
-            editDisabled:false
+            editDisabled:false,
+            msj: false
         });
     }
 
@@ -115,10 +131,18 @@ class List extends Component{
     render() {
         return (
             <div className="container">
+            <br />
                 <div className="row>">
                     <form onSubmit={this.onSubmit}>
                         <input type="hidden" id="ItemId" name="ItemId"></input>
                         <div className="col-md-6 mx-auto">
+                        {this.state.msj ? (
+                            <div className="alert alert-danger" role="alert">
+                                {this.state.mesaje}
+                            </div>
+                        ) : (
+                            ''
+                        )}
                             <div className="form-group">
                                 <label htmlFor="selectUser">Usuario Asignado</label>
                                 <select className="form-control" id="selectUser" name="selectUser" value={this.state.selectUser || ''} onChange={this.onChange.bind(this)}>
@@ -152,6 +176,7 @@ class List extends Component{
                         </div>
                     </form>
                 </div>
+                <hr />
                 <div className="row">
                     <div className="col-md-12">
                         <table className="table">
@@ -159,6 +184,7 @@ class List extends Component{
                                 <tr className="text-center">
                                     <th>Usuario Responsable</th>
                                     <th>Detalle</th>
+                                    <th>Pedido</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -167,6 +193,7 @@ class List extends Component{
                                     <tr key={index}>
                                         <td className="text-left">{item.detail}</td>
                                         <td className="text-left">{item.user}</td>
+                                        <td className="text-center">{item.ticket_pedido == 'SI' ? 'Si':'No'}</td>
                                         <td className="text-center">
                                             <button href="" className="btn btn-info mr-1" disabled={this.state.editDisabled}
                                             onClick={this.onEdit.bind(this, item.id)}>Edit</button>

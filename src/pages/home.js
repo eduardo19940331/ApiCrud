@@ -33,8 +33,9 @@ class List extends Component{
         })
     }
 
-    onSubmit = (itemId, e) => {
-        e.preventDefault();
+    onSubmit = (e, itemId) => {
+        console.log(e);
+        console.log(itemId);
         confirmTicket(itemId).then(() => {
             this.getAll();
         });
@@ -66,9 +67,10 @@ class List extends Component{
                                         <td className="text-center">
                                         {item.pedido == "NO" ? (
                                             <button href="" className="btn btn-success mr-1" disabled={this.state.editDisabled}
-                                            onClick={this.onSubmit.bind(this, item.id)}>Pedir Ticket</button>
+                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?') == true) this.onSubmit(e, item.id) } }>Pedir Ticket</button>
                                         ) : (
-                                            ''
+                                            <button href="" className="btn btn-danger mr-1" disabled={this.state.editDisabled}
+                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?') == true) this.onSubmit(e, item.id) } }>Volver Ticket</button>
                                         )}
                                         </td>
                                     </tr>

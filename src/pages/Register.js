@@ -10,6 +10,10 @@ class Register extends Component {
             tipoUser: '',
             email: '',
             password: '',
+            msj: false,
+            mesaje: '',
+            classmsj: '',
+            btnDisabled: false
         }
 
         this.onChange = this.onChange.bind(this);
@@ -23,6 +27,21 @@ class Register extends Component {
     onSubmit(e){
         e.preventDefault();
 
+        if(this.state.first_name == "" || this.state.last_name == ""
+        || this.state.email == "" || this.state.password == ""){
+            this.setState({
+                msj: true,
+                classmsj:"alert alert-danger",
+                mesaje: "Ingrese todos los campos por favor"
+            });
+            return;
+        }
+
+        this.setState({
+            msj: false,
+            btnDisabled: true
+        })
+
         const newUser = {
             name : this.state.first_name + ' ' + this.state.last_name,
             tipoUser: this.state.tipoUser,
@@ -31,7 +50,39 @@ class Register extends Component {
         }
 
         register(newUser).then(res => {
-            this.props.history.push(`/login`)
+            if(res){
+            this.setState({
+                msj: true,
+                classmsj:"alert alert-success",
+                mesaje: "Usuario Ingresado Correctamente",
+                btnDisabled: false
+            });
+            this.setState({
+                first_name:'',
+                last_name:'',
+                tipoUser: '',
+                email: '',
+                password: ''
+            });
+            setTimeout(() => {
+                this.setState({
+                    msj: false,
+                });
+              }, 3000);
+              return;
+            }
+                this.setState({
+                    msj: true,
+                    classmsj:"alert alert-danger",
+                    mesaje: "Usuario ya existe en el sistema",
+                    btnDisabled: false
+                });
+                setTimeout(() => {
+                    this.setState({
+                        msj: false,
+                    });
+                  }, 3000);
+                return;
         })
     }
 
@@ -40,6 +91,13 @@ class Register extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
+                        {this.state.msj ? (
+                            <div className={this.state.classmsj} role="alert">
+                                {this.state.mesaje}
+                            </div>
+                        ) : (
+                            ''
+                        )}
                         <form noValidate onSubmit={this.onSubmit}>
                             <h1 className="h3 mb-3 font-weight-normal">
                                 Registrar
@@ -80,7 +138,7 @@ class Register extends Component {
                                 value={this.state.password}
                                 onChange={this.onChange}/>
                             </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">Registrar</button>
+                            <button type="submit" disabled={this.state.btnDisabled} className="btn btn-lg btn-primary btn-block">Registrar</button>
                         </form>
                     </div>
                 </div>
