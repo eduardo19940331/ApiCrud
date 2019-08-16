@@ -2,11 +2,12 @@ import axios from 'axios';
 
 export const getListTicket = (userId) => {
     return axios.post('/api/ticket/owner', {
-        userId: 1, //userId,
+        userId: localStorage.getItem('userid'),
     },{
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
+        console.log(localStorage.getItem('userid'));
         return res.data;
     })
 }

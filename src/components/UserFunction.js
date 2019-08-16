@@ -16,14 +16,17 @@ export const login = user => {
     console.log(user);
     return axios.post('api/login', {
         email: user.email,
-        password: user.password  
+        password: user.password
     }, {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
-        localStorage.setItem('usertoken', res.data.token);
-        console.log(res);
-        return res.data;
+        if(res){
+            localStorage.setItem('usertoken', res.data.token.token);
+            localStorage.setItem('userid', res.data.user.id);
+            localStorage.setItem('id_tipouser', res.data.user.id_tipouser);
+            return res.data;
+        }
     })
     .catch(err => {
         console.log(err);
@@ -35,7 +38,9 @@ export const getProfile = () => {
         headers: {Authorization: `Bearer ${localStorage.usertoken}`}
     })
     .then(res => {
-        console.log(res);
+        console.log(res.data.user.id);
+        localStorage.setItem('userid', res.data.user.id);
+        localStorage.setItem('id_user', res.data.user.id_user);
         return res.data;
     })
     .catch(err => {

@@ -118,13 +118,7 @@ class List extends Component{
                 <div className="row>">
                     <form onSubmit={this.onSubmit}>
                         <input type="hidden" id="ItemId" name="ItemId"></input>
-                        <div className="col-md-6">
-                            <div className="form-group">
-                                <label htmlFor="detail">Detail</label>
-                                <input type="text" className="form-control" id="detail" name="detail" value={this.state.detail || ''} onChange={this.onChange.bind(this)} />
-                            </div>
-                        </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 mx-auto">
                             <div className="form-group">
                                 <label htmlFor="selectUser">Usuario Asignado</label>
                                 <select className="form-control" id="selectUser" name="selectUser" value={this.state.selectUser || ''} onChange={this.onChange.bind(this)}>
@@ -133,6 +127,12 @@ class List extends Component{
                                         <option key={i} value={item.id}>{item.name}</option>
                                     ))}
                                 </select>
+                            </div>
+                        </div>
+                        <div className="col-md-6 mx-auto">
+                            <div className="form-group">
+                                <label htmlFor="detail">Detail</label>
+                                <textarea className="form-control" id="detail" name="detail" value={this.state.detail || ''} onChange={this.onChange.bind(this)} ></textarea>
                             </div>
                         </div>
                         <div className="row">
@@ -157,7 +157,6 @@ class List extends Component{
                         <table className="table">
                             <thead>
                                 <tr className="text-center">
-                                    <th></th>
                                     <th>Usuario Responsable</th>
                                     <th>Detalle</th>
                                     <th>Acciones</th>
@@ -166,7 +165,6 @@ class List extends Component{
                             <tbody>
                                 {this.state.items.map((item, index) => (
                                     <tr key={index}>
-                                        <td className="text-left">{item.id}</td>
                                         <td className="text-left">{item.detail}</td>
                                         <td className="text-left">{item.user}</td>
                                         <td className="text-center">

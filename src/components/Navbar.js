@@ -4,6 +4,7 @@ class Navbar extends React.Component {
     logOut(e){
         e.preventDefault();
         localStorage.removeItem('usertoken');
+        localStorage.removeItem('userid');
         this.props.history.push('/');
     }
     //getNavLinkClass = (path) => {
@@ -11,54 +12,52 @@ class Navbar extends React.Component {
     //}
     render() {
         const loginRegLink = (
-            <ul className="navbar-nav">
+            <ul className="nav">
                 <li className="nav-item">
-                    <Link to="/login" className="nav-link">Login</Link>
+                    <Link to="/" className="nav-link color-option">Home</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/register" className="nav-link">Registrar</Link>
+                    <Link to="/login" className="nav-link color-option">Login</Link>
                 </li>
             </ul>
         )
 
         const userLink = (
-            <ul className="navbar-nav">
+            <ul className="nav">
                 <li className="nav-item">
-                    <Link to="/profile" className="nav-link">Profile</Link>
+                    <Link to="/" className="nav-link color-option">Home</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/home" className="nav-link">Mis Ticket</Link>
+                    <Link to="/profile" className="nav-link color-option">Profile</Link>
                 </li>
+                {localStorage.getItem('id_tipouser') == 2? (
+                    <li className="nav-item">
+                        <Link to="/home" className="nav-link color-option">Mis Ticket</Link>
+                    </li>
+                ) : (
+                    <li className="nav-item">
+                        <Link to="/register" className="nav-link color-option">Resitro de Usuarios</Link>
+                    </li>
+                )}
+                {localStorage.getItem('id_tipouser') == 1? (
+                    <li className="nav-item">
+                        <Link to="/ticket/admin" className="nav-link color-option">Administracion de Ticket</Link>
+                    </li>
+                ) : (
+                    ''
+                )}
                 <li className="nav-item">
-                    <Link to="/ticket/admin" className="nav-link">Administracion de Ticket</Link>
-                </li>
-                <li className="nav-item">
-                    <a href="/" onClick={this.logOut.bind(this)} className="nav-link">Salir</a>
+                    <a href="/" onClick={this.logOut.bind(this)} className="nav-link color-option-danger">Cerrar Sesion</a>
                 </li>
             </ul>
         )
 
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-                <button className="navbar-toggle"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbar1"
-                    aria-controls="navbar1"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span className="nabvar-toggler-icon"></span>
-                </button>
-
-                <div id="navbar1" className="collapse navbar-collapse justify-content-md-center">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link">
-                                Home
-                            </Link>
-                        </li>
-                    </ul>
+                <div id="navbar1" className="navbar-collapse justify-content-md-center">
+                    
                     {localStorage.usertoken ? userLink : loginRegLink}
+
                 </div>
             </nav>
         )

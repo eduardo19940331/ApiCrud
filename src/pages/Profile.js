@@ -11,11 +11,11 @@ class Profile extends Component {
     }
     componentDidMount() {
         getProfile().then(res => {
-            console.log(res);
             this.setState({
                 name: res.user.name,
                 email: res.user.email
             });
+            console.log(res.user.id_tipouser);
         });
     }
 
@@ -23,10 +23,10 @@ class Profile extends Component {
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
-                    <div className="col-sm-4 mx-auto">
-                        <h1 className="text-canter">Tu Perfil...</h1>
+                    <div className="col-sm-12 mx-auto">
+                        <h1 className="text-canter">Bienvenido a I-Gestion Ticket</h1>
                     </div>
-                    <table className="table col-md-4 mx-auto">
+                    <table className="table col-md-8 mx-auto">
                         <tbody>
                             <tr>
                                 <th>Nombre</th>

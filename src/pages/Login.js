@@ -30,7 +30,7 @@ class Login extends Component {
             console.log(res);
             if(res){
                 console.log(res);
-                this.props.history.push(`/profile`)
+                window.location.replace('/profile');
             }
         })
     }
