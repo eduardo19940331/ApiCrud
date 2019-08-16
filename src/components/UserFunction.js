@@ -39,7 +39,7 @@ export const getProfile = () => {
         headers: {Authorization: `Bearer ${localStorage.usertoken}`}
     })
     .then(res => {
-        console.log(res.data.user.id);
+        console.log(res);
         localStorage.setItem('userid', res.data.user.id);
         localStorage.setItem('id_user', res.data.user.id_user);
         return res.data;

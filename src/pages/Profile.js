@@ -11,11 +11,12 @@ class Profile extends Component {
     }
     componentDidMount() {
         getProfile().then(res => {
-            this.setState({
+            if(res){
+                this.setState({
                 name: res.user.name,
                 email: res.user.email
-            });
-            console.log(res.user.id_tipouser);
+                });
+            }
         });
     }
 
@@ -24,20 +25,24 @@ class Profile extends Component {
             <div className="container">
                 <div className="jumbotron mt-5">
                     <div className="col-sm-12 mx-auto">
-                        <h1 className="text-canter">Bienvenido a I-Gestion Ticket</h1>
+                        <h1 className="text-center">Bienvenido a I-Gestion Ticket</h1>
                     </div>
-                    <table className="table col-md-8 mx-auto">
-                        <tbody>
-                            <tr>
-                                <th>Nombre</th>
-                                <td>{this.state.name}</td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td>{this.state.email}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {this.state.name != "" && this.state.email != ""? ( 
+                        <table className="table col-md-8 mx-auto">
+                            <tbody>
+                                <tr>
+                                    <th className="text-center">Nombre</th>
+                                    <td className="text-center">{this.state.name}</td>
+                                </tr>
+                                <tr>
+                                    <th className="text-center">Email</th>
+                                    <td className="text-center">{this.state.email}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    ):(
+                        <h5 className="text-center">Cargando...</h5>
+                    )}
                 </div>
             </div>
         )

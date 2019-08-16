@@ -44,11 +44,13 @@ class List extends Component{
     render() {
         return (
             <div className="container">
+                <br />
                 <div className="row">
                     <div className="col-md-12 text-center">
                         <h3>Tickets Asignados</h3>
                     </div>
                 </div>
+                <br />
                 <div className="row">
                     <div className="col-md-12">
                         <table className="table">
@@ -63,14 +65,13 @@ class List extends Component{
                                 {this.state.items.map((item, index) => (
                                     <tr key={index}>
                                         <td className="text-left">{item.user}</td>
-                                        <td className="text-left">{item.detail}</td>
+                                        <td className="text-left" style={{"width" : "60%"}}>{item.detail}</td>
                                         <td className="text-center">
                                         {item.pedido == "NO" ? (
                                             <button href="" className="btn btn-success mr-1" disabled={this.state.editDisabled}
-                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?') == true) this.onSubmit(e, item.id) } }>Pedir Ticket</button>
-                                        ) : (
+                                            onClick={(e) => { if (window.confirm('¿Realmente desea pedir el ticket?') == true) this.onSubmit(e, item.id) } }>Pedir Ticket</button>                                            ) : (
                                             <button href="" className="btn btn-danger mr-1" disabled={this.state.editDisabled}
-                                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?') == true) this.onSubmit(e, item.id) } }>Volver Ticket</button>
+                                            onClick={(e) => { if (window.confirm('¿Realmente desea volver el ticket?') == true) this.onSubmit(e, item.id) } }>Volver Ticket</button>
                                         )}
                                         </td>
                                     </tr>

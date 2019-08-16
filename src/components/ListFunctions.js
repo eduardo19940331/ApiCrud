@@ -37,12 +37,11 @@ export const addItem = (detail, userId ) => {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
-        console.log(res);
+        //console.log(res);
     });
 }
 
 export const updateItem = (detail, selUser, id) => {
-    console.log(detail, selUser, id);
     return axios.put(`/api/ticket/${id}`, {
         detail: detail,
         selUser: selUser
@@ -51,7 +50,7 @@ export const updateItem = (detail, selUser, id) => {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
-        console.log(res);
+        //console.log(res);
     }).catch(err => {
         console.log(err);
     });
@@ -62,7 +61,7 @@ export const deleteItem = id => {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
-        console.log(res);
+        //console.log(res);
     }).catch(err => {
         console.log(err);
     });

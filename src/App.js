@@ -19,7 +19,6 @@ const isAuthenticated = () => {
     }catch(e){
       return false;
     }
-    console.log(isvalid)
     return isvalid;
 };
 

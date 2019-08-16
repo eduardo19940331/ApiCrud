@@ -34,9 +34,6 @@ class List extends Component{
         dataUserCmb().then(data => {
             this.setState({
                 dataCmb: data
-            },
-            () => {
-                console.log(this.state.dataCmb);
             });
         })
     }
@@ -45,9 +42,6 @@ class List extends Component{
         getList().then(data => {
             this.setState({
                 items: data
-            },
-            () => {
-                console.log(this.state.items);
             });
         })
     }
@@ -75,7 +69,6 @@ class List extends Component{
     
     onUpdate = (e) => {
         e.preventDefault();
-        console.log(this.state.selectUser);
         if(this.state.detail === "" || this.state.selectUser === '') {
             this.setState({
                 msj: true,
@@ -90,7 +83,8 @@ class List extends Component{
             });
             this.setState({
                 detail:'',
-                editDisabled: ''
+                editDisabled: '',
+                selectUser: ''
             });
             this.getAll();
         }
@@ -103,10 +97,8 @@ class List extends Component{
                 ItemId: itemid,
                 detail: data.detail,
                 selectUser: data.id_user,
-                editDisabled:true
-            },
-            () => {
-                console.log(this.state.items);
+                editDisabled:true,
+                msj:false
             });
         });
     }
@@ -122,16 +114,22 @@ class List extends Component{
         });
     }
 
-    onDelete = (val, e) => {
+    onDelete = ( e, itemId) => {
         e.preventDefault();
-        deleteItem(val);
+        deleteItem(itemId);
         this.getAll();
     }
 
     render() {
         return (
             <div className="container">
-            <br />
+                <br />
+                <div className="row">
+                    <div className="col-md-12 text-center">
+                        <h3>Administracion de Ticket</h3>
+                    </div>
+                </div>
+                <br />
                 <div className="row>">
                     <form onSubmit={this.onSubmit}>
                         <input type="hidden" id="ItemId" name="ItemId"></input>
@@ -176,13 +174,13 @@ class List extends Component{
                         </div>
                     </form>
                 </div>
-                <hr />
+                <br />
                 <div className="row">
                     <div className="col-md-12">
                         <table className="table">
                             <thead>
                                 <tr className="text-center">
-                                    <th>Usuario Responsable</th>
+                                    <th style={{"width" : "50%"}}>Usuario Responsable</th>
                                     <th>Detalle</th>
                                     <th>Pedido</th>
                                     <th>Acciones</th>
@@ -198,7 +196,7 @@ class List extends Component{
                                             <button href="" className="btn btn-info mr-1" disabled={this.state.editDisabled}
                                             onClick={this.onEdit.bind(this, item.id)}>Edit</button>
                                             <button href="" className="btn btn-danger mr-1" disabled={this.state.editDisabled}
-                                            onClick={this.onDelete.bind(this, item.id)}>Delete</button>
+                                            onClick={(e) => { if (window.confirm('¿Realmente desea eliminar el ticket?') == true) this.onDelete(e, item.id) } }>Delete</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -207,7 +205,6 @@ class List extends Component{
                     </div>
                 </div>
             </div>
-
         )
     }
 }
