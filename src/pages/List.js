@@ -154,7 +154,7 @@ class List extends Component{
                         <div className="col-md-6 mx-auto">
                             <div className="form-group">
                                 <label htmlFor="detail">Detail</label>
-                                <textarea className="form-control" id="detail" name="detail" value={this.state.detail || ''} onChange={this.onChange.bind(this)} ></textarea>
+                                <textarea className="form-control" id="detail" name="detail" value={this.state.detail || ''} onChange={this.onChange.bind(this)} maxlength="200"></textarea>
                             </div>
                         </div>
                         <div className="row">

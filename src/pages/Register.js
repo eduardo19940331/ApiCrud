@@ -109,7 +109,8 @@ class Register extends Component {
                                 name="first_name"
                                 placeholder="Ingrese Nombre"
                                 value={this.state.first_name}
-                                onChange={this.onChange}/>
+                                onChange={this.onChange}
+                                maxlength="50"/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="last_name">Apellido</label>
@@ -118,7 +119,8 @@ class Register extends Component {
                                 name="last_name"
                                 placeholder="Ingrese Apellido"
                                 value={this.state.last_name}
-                                onChange={this.onChange}/>
+                                onChange={this.onChange}
+                                maxlength="50"/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
@@ -127,7 +129,8 @@ class Register extends Component {
                                 name="email"
                                 placeholder="Ingrese Email"
                                 value={this.state.email}
-                                onChange={this.onChange}/>
+                                onChange={this.onChange}
+                                maxlength="100"/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Contraseña</label>
@@ -136,7 +139,8 @@ class Register extends Component {
                                 name="password"
                                 placeholder="Ingrese contraseña"
                                 value={this.state.password}
-                                onChange={this.onChange}/>
+                                onChange={this.onChange}
+                                maxlength="12"/>
                             </div>
                             <button type="submit" disabled={this.state.btnDisabled} className="btn btn-lg btn-primary btn-block">Registrar</button>
                         </form>
