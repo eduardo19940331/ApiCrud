@@ -53,7 +53,6 @@ class List extends Component{
                         <table className="table">
                             <thead>
                                 <tr className="text-center">
-                                    <th></th>
                                     <th>Usuario Responsable</th>
                                     <th>Detalle</th>
                                     <th>Acciones</th>
@@ -62,9 +61,8 @@ class List extends Component{
                             <tbody>
                                 {this.state.items.map((item, index) => (
                                     <tr key={index}>
-                                        <td className="text-left">{item.id}</td>
-                                        <td className="text-left">{item.detail}</td>
                                         <td className="text-left">{item.user}</td>
+                                        <td className="text-left">{item.detail}</td>
                                         <td className="text-center">
                                         {item.pedido == "NO" ? (
                                             <button href="" className="btn btn-success mr-1" disabled={this.state.editDisabled}

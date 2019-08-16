@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import Route from 'react-router-dom/Route'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+
 import Agregar from './pages/agregar'
 import List from './pages/List'
 import Home from './pages/home'
-import { BrowserRouter } from 'react-router-dom'
-import Nav from "./components/Navbar"
+import Register from './pages/Register'
+import Navbar from "./components/Navbar"
+import Landing from "./pages/Landing"
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+
+//const Landing = () => <h1>Contenido no autorizado</h1>
 
 class App extends Component {
-  render() {
-    return (
-      <div>
-        <BrowserRouter>
-          <div>
-            <Nav />
-            <Route exact path="/" component={Home} />
-            <Route path="/agregar" component={Agregar} />
-            <Route path="/List" component={List} />
-          </div>
-        </BrowserRouter>
-      </div>
-    );
-  }
+    render() {
+        return (
+          <Router>
+            <div className="App">
+              <Navbar />
+                <Route exact path="/" component={Landing} />
+                <div className="container">
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/profile" component={Profile} />
+                  <Route exact path="/ticket/admin" component={List} />
+                  <Route exact path="/home" component={Home} />
+                </div>
+            </div>
+          </Router>
+        )
+    }
 }
 export default App;
